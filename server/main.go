@@ -17,7 +17,7 @@ func main() {
 	supervisor.GoroutinesStart()
 
 	http.HandleFunc("/ws", server.HandleWebSockets)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":18181", nil)
 
 	wg.Wait()
 }

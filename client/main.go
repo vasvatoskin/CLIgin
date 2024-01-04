@@ -22,7 +22,7 @@ func main() {
 	wg := sync.WaitGroup{}
 
 	client := webSocketClient.New()
-	client.Connect("ws://localhost:8080/ws")
+	client.Connect("ws://localhost:18181/ws")
 
 	game, err := gameClient.New()
 	if err != nil {
