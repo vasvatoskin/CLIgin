@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/vasvatoskin/CLIgin/client/gmCint"
-	"github.com/vasvatoskin/CLIgin/client/supvClnt"
-	"github.com/vasvatoskin/CLIgin/client/wsClnt"
+	"github.com/vasvatoskin/CLIgin/client/gameClient"
+	"github.com/vasvatoskin/CLIgin/client/supervisorClient"
+	"github.com/vasvatoskin/CLIgin/client/webSocketClient"
 	"github.com/vasvatoskin/CLIgin/logger"
 	"log"
 	"os"
@@ -21,17 +21,17 @@ func main() {
 
 	wg := sync.WaitGroup{}
 
-	client := wsClnt.New()
+	client := webSocketClient.New()
 	client.Connect("ws://localhost:8080/ws")
 
-	game, err := gmCint.New()
+	game, err := gameClient.New()
 	if err != nil {
 		log.Fatal("Not create Game")
 		os.Exit(1)
 		return
 	}
 
-	supervisor := supvClnt.New(client, game, &wg)
+	supervisor := supervisorClient.New(client, game, &wg)
 
 	supervisor.GoroutinesStart()
 	time.Sleep(2 * time.Second)

@@ -24,3 +24,7 @@ type ClientMessage struct {
 	Vector
 	IsShooting bool `json:"is_shooting"`
 }
+
+type mystr struct {
+	arr []int
+}

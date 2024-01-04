@@ -1,19 +1,19 @@
-package supvClnt
+package supervisorClient
 
 import (
-	"github.com/vasvatoskin/CLIgin/client/gmCint"
-	"github.com/vasvatoskin/CLIgin/client/wsClnt"
+	"github.com/vasvatoskin/CLIgin/client/gameClient"
+	"github.com/vasvatoskin/CLIgin/client/webSocketClient"
 	"github.com/vasvatoskin/CLIgin/shared"
 	"sync"
 )
 
 type Supervisor struct {
-	client *wsClnt.Client
-	game   *gmCint.Game
+	client *webSocketClient.Client
+	game   *gameClient.Game
 	wg     *sync.WaitGroup
 }
 
-func New(c *wsClnt.Client, g *gmCint.Game, wg *sync.WaitGroup) *Supervisor {
+func New(c *webSocketClient.Client, g *gameClient.Game, wg *sync.WaitGroup) *Supervisor {
 	return &Supervisor{
 		client: c,
 		game:   g,

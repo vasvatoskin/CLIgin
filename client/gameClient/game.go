@@ -1,4 +1,4 @@
-package gmCint
+package gameClient
 
 import (
 	"github.com/gdamore/tcell/v2"
@@ -21,12 +21,12 @@ func New() (*Game, error) {
 	screen, err := tcell.NewScreen()
 
 	if err != nil {
-		log.Println("Error creating gmCint:", err)
+		log.Println("Error creating gameClient:", err)
 		return nil, err
 	}
 
 	if err := screen.Init(); err != nil {
-		log.Println("Error initializing gmCint:", err)
+		log.Println("Error initializing gameClient:", err)
 		return nil, err
 	}
 
@@ -68,13 +68,13 @@ func (g *Game) EventHandler() {
 				if ev.Key() == tcell.KeyEscape || ev.Key() == tcell.KeyCtrlC {
 					msg.Type = shared.DisconnectMessage
 				} else if ev.Key() == tcell.KeyUp || ev.Rune() == 'w' {
-					vector.SetDy(0)
+					vector.SetDy(-1)
 				} else if ev.Key() == tcell.KeyDown || ev.Rune() == 's' {
-					vector.SetDy(-2)
+					vector.SetDy(1)
 				} else if ev.Key() == tcell.KeyLeft || ev.Rune() == 'a' {
-					vector.SetDx(-2)
+					vector.SetDx(-1)
 				} else if ev.Key() == tcell.KeyRight || ev.Rune() == 'd' {
-					vector.SetDx(0)
+					vector.SetDx(1)
 				}
 				msg.Vector = vector
 				g.outgoingChan <- msg
@@ -93,17 +93,19 @@ func (g *Game) EventHandler() {
 
 func (g *Game) Render() {
 	var msg shared.ServerMessage
+	g.screen.Clear()
 	for {
 		select {
 
 		case msg = <-g.incomingChan:
-			g.screen.Clear()
 			switch msg.Type {
 			case shared.GameEventMessage:
+				g.screen.Clear()
 				for _, pixel := range msg.FScreen.Pixels {
-					g.screen.SetContent(pixel.Coordinate.X, pixel.Coordinate.Y, pixel.Texture, nil, g.defStyle)
+					g.screen.SetContent(pixel.X, pixel.Y, pixel.Texture, nil, g.defStyle)
 				}
 			}
+			g.screen.Show()
 
 		case <-g.close:
 			log.Println("Render closed")

@@ -1,4 +1,4 @@
-package wsSrv
+package webSocketServer
 
 import (
 	"github.com/gorilla/websocket"
@@ -110,6 +110,6 @@ func (s *Server) Shutdown() {
 	close(s.outgoingChan)
 }
 
-func (s *Server) GetOutgoingChanel() chan shared.ServerMessage { return s.outgoingChan }
+func (s *Server) GetOutgoingChannel() chan shared.ServerMessage { return s.outgoingChan }
 
-func (s *Server) GetIncomingChanel() chan shared.ClientMessage { return s.incomingChan }
+func (s *Server) GetIncomingChannel() chan shared.ClientMessage { return s.incomingChan }

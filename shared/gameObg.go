@@ -1,15 +1,15 @@
 package shared
 
 type FScreen struct {
-	Pixels []Pixel
+	Pixels []Pixel `json:"pixels"`
 }
 
 type GameObj struct {
-	ID     uint64
-	Pixels []Pixel
+	ID     uint64  `json:"id"`
+	Pixels []Pixel `json:"pixels"`
 }
 
 type Pixel struct {
-	Coordinate Point
-	Texture    rune
+	Point
+	Texture rune `json:"texture"`
 }
