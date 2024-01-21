@@ -2,7 +2,7 @@ package webSocketClient
 
 import (
 	"github.com/gorilla/websocket"
-	"github.com/vasvatoskin/CLIgin/shared"
+	"github.com/vasvatoskin/CLIgin/internal/shared"
 	"log"
 )
 

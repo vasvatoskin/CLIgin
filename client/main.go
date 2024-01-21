@@ -4,7 +4,7 @@ import (
 	"github.com/vasvatoskin/CLIgin/client/gameClient"
 	"github.com/vasvatoskin/CLIgin/client/supervisorClient"
 	"github.com/vasvatoskin/CLIgin/client/webSocketClient"
-	"github.com/vasvatoskin/CLIgin/logger"
+	"github.com/vasvatoskin/CLIgin/internal/logger"
 	"log"
 	"os"
 	"sync"
@@ -22,7 +22,7 @@ func main() {
 	wg := sync.WaitGroup{}
 
 	client := webSocketClient.New()
-	client.Connect("ws://localhost:18181/ws")
+	client.Connect("ws://ec2-13-53-169-251.eu-north-1.compute.amazonaws.com:18181/ws")
 
 	game, err := gameClient.New()
 	if err != nil {

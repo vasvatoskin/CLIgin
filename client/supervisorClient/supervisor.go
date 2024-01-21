@@ -3,7 +3,7 @@ package supervisorClient
 import (
 	"github.com/vasvatoskin/CLIgin/client/gameClient"
 	"github.com/vasvatoskin/CLIgin/client/webSocketClient"
-	"github.com/vasvatoskin/CLIgin/shared"
+	"github.com/vasvatoskin/CLIgin/internal/shared"
 	"sync"
 )
 

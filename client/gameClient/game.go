@@ -2,7 +2,7 @@ package gameClient
 
 import (
 	"github.com/gdamore/tcell/v2"
-	"github.com/vasvatoskin/CLIgin/shared"
+	"github.com/vasvatoskin/CLIgin/internal/shared"
 	"log"
 )
 
@@ -102,7 +102,7 @@ func (g *Game) Render() {
 			case shared.GameEventMessage:
 				g.screen.Clear()
 				for _, pixel := range msg.FScreen.Pixels {
-					g.screen.SetContent(pixel.X, pixel.Y, pixel.Texture, nil, g.defStyle)
+					g.screen.SetContent(pixel.X, pixel.Y, pixel.Symbol, nil, g.defStyle)
 				}
 			}
 			g.screen.Show()
