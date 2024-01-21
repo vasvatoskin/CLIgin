@@ -24,6 +24,7 @@ func New() (*Engin, error) {
 		return nil, err
 	}
 
+	screen.EnableMouse()
 	screen.Clear()
 
 	w, h := screen.Size()
@@ -34,19 +35,20 @@ func New() (*Engin, error) {
 	}, nil
 }
 
-func (e *Engin) Run(screen tcell.Screen) error {
+func (e *Engin) Run() error {
 	for {
-		ev := screen.PollEvent()
+		ev := e.screen.PollEvent()
 		switch ev := ev.(type) {
 		case *tcell.EventKey:
 			if ev.Key() == tcell.KeyEsc {
+				e.screen.Fini()
 				return nil
 			}
-			e.handleKeyEvent(ev, screen)
+			e.handleKeyEvent(ev, e.screen)
 		case *tcell.EventMouse:
-			e.handleMouseEvent(ev, screen)
+			e.handleMouseEvent(ev, e.screen)
 		}
 
-		screen.Show()
+		e.screen.Show()
 	}
 }

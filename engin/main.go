@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/gdamore/tcell/v2"
 	"github.com/vasvatoskin/CLIgin/engin/engin"
 	"github.com/vasvatoskin/CLIgin/internal/logger"
+	"log"
 	"os"
 )
 
@@ -14,20 +14,15 @@ func main() {
 		return
 	}
 	defer logFile.Close()
-	screen, err := tcell.NewScreen()
+
+	engin, err := engin.New()
 	if err != nil {
-		panic(err)
+		log.Fatal("Not create Game")
+		os.Exit(1)
+		return
 	}
-	if err := screen.Init(); err != nil {
-		panic(err)
-	}
-	defer screen.Fini()
 
-	app := &engin.Engin{}
-
-	screen.EnableMouse()
-
-	if err := app.Run(screen); err != nil {
+	if err := engin.Run(); err != nil {
 		panic(err)
 	}
 }
