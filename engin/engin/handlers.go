@@ -2,20 +2,18 @@ package engin
 
 import "github.com/gdamore/tcell/v2"
 
-func (e *Engin) handleMouseEvent(event *tcell.EventMouse, s tcell.Screen) {
+func (e *Engin) handleMouseEvent(event *tcell.EventMouse) {
 	if event.Buttons() == tcell.Button1 {
-		// Обработка нажатия левой кнопки мыши
 		x, y := event.Position()
 		defStyle := tcell.StyleDefault.Background(tcell.ColorWhite).Foreground(tcell.ColorGold)
-		s.SetContent(x, y, '\u28FF', []rune{'o', 'A'}, defStyle)
-		// Далее ваш код обработки события
+		e.screen.SetContent(x, y, '\u28FF', []rune{'o', 'A'}, defStyle)
 	}
 }
 
-func (e *Engin) handleKeyEvent(event *tcell.EventKey, s tcell.Screen) {
+func (e *Engin) handleKeyEvent(event *tcell.EventKey) {
 	switch event.Rune() {
 	case 'c':
-		s.Clear()
+		e.screen.Clear()
 	}
 
 }

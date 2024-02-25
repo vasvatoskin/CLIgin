@@ -7,9 +7,8 @@ import (
 )
 
 type Game struct {
-	screen       tcell.Screen
-	width        int
-	height       int
+	screen tcell.Screen
+	shared.Size
 	id           uint64
 	defStyle     tcell.Style
 	incomingChan chan shared.ServerMessage
@@ -37,8 +36,7 @@ func New() (*Game, error) {
 	w, h := screen.Size()
 	return &Game{
 		screen:       screen,
-		width:        w,
-		height:       h,
+		Size:         shared.Size{Width: w, Height: h},
 		defStyle:     defStyle,
 		incomingChan: make(chan shared.ServerMessage),
 		outgoingChan: make(chan shared.ClientMessage),
@@ -62,7 +60,7 @@ func (g *Game) EventHandler() {
 
 			case *tcell.EventResize:
 				g.screen.Sync()
-				g.width, g.height = g.screen.Size()
+				g.Width, g.Height = g.screen.Size()
 
 			case *tcell.EventKey:
 				if ev.Key() == tcell.KeyEscape || ev.Key() == tcell.KeyCtrlC {

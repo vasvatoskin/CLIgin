@@ -17,7 +17,7 @@ func main() {
 
 	engin, err := engin.New()
 	if err != nil {
-		log.Fatal("Not create Game")
+		log.Fatal("Not create Engin")
 		os.Exit(1)
 		return
 	}
